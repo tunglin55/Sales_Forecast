@@ -1,4 +1,4 @@
-# Sales Forecast for a Company (undisclosed)
+# Sales Forecast - Undisclosed Company
 <p align="center">
 <img src="images/sales_logo.png">
 </p>
