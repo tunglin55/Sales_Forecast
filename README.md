@@ -15,20 +15,20 @@ Upon loading and inspection of the T1 dataset, exploratory data analysis reveale
 </p>
 
 ## Data Preparation and Model Selection
-Before the selection of a time series model, inspection of plots, summary statistics and statistical tests were performed to identify possible trends, seasonality, autoregression elements, and amount of differencing required to achieve stationarity. Specifically, time series were plotted with its autocorrelation and partial autocorrelation functions as shown in Figure 2 to gain insight on the order of MA and AR terms respectively. Dickey-Fuller tests were also computed to test whether unit root is present in the time series.
+Before the selection of a time series model, inspection of plots, summary statistics and statistical tests were performed to identify possible trends, seasonality, autoregression elements, and amount of differencing required to achieve stationarity. Specifically, time series were plotted with its autocorrelation and partial autocorrelation functions as shown in the figure below to gain insight on the order of MA and AR terms respectively. Dickey-Fuller tests were also computed to test whether unit root is present in the time series.
 
 <p align="center">
 <img width="600" height="350" src="images/Montreal_time_series.png">
 </p>
 
-It is evident that both the time series and first-order-differenced time series were not stationary through the varying spread of values and the increasing mean values with time. Indeed, this was consistent with the Dickey-Fulley test (p > 0.05). A log-transformation was subsequently applied with results shown in Figure 3 that shows the same calculations as in Figure 2. The Dickey-Fuller test now indicates that stationary is achieved with first-order differencing and the number of significant peaks in the ACF and PCF have dropped. With stationary achieved and the absence of seasonality, the ARIMA model was subsequently selected as a forecast model for Montreal and Toronto. With only five months of time series data points available in Austin, ARIMA is inappropriate. Given the evident upward trend in Austin’s time series, the Holt linear trend (double exponential smoothing) method was used to forecast the order volume.
+It is evident that both the time series and first-order-differenced time series were not stationary through the varying spread of values and the increasing mean values with time. Indeed, this was consistent with the Dickey-Fulley test (p > 0.05). A log-transformation was subsequently applied with results shown below that shows the same calculations as in the figure above. The Dickey-Fuller test now indicates that stationary is achieved with first-order differencing and the number of significant peaks in the ACF and PCF have dropped. With stationary achieved and the absence of seasonality, the ARIMA model was subsequently selected as a forecast model for Montreal and Toronto. With only five months of time series data points available in Austin, ARIMA is inappropriate. Given the evident upward trend in Austin’s time series, the Holt linear trend (double exponential smoothing) method was used to forecast the order volume.
 
 <p align="center">
 <img width="600" height="350" src="images/log_Montreal_time_series.png">
 </p>
 
 ## Grid Search and Cross-validation
-For both ARIMA and Holt’s linear model, grid search with cross validation of the optimal hyperparameters was implemented. It is important to note that the standard k-fold cross validation technique is not appropriate for time series analysis given the possibility of data leakage, temporal dependencies between data points and inaccuracy in simulating the forecasting environment. Instead, a walk-forward validation was performed where the training set consists of only observations that occur prior to the test observation, with no information from future observations used for constructing the forecast. The forecast accuracy was subsequently evaluated by averaging over the mean absolute percentage error (MAPE) of the next test data point. This procedure is illustrated in Figure 4 below. Hyperparameters tuned included p (number of AR terms), q (number of MA terms), and d (number of differences) for ARIMA while the level and trend smoothing terms were tuned for Holt’s linear model.
+For both ARIMA and Holt’s linear model, grid search with cross validation of the optimal hyperparameters was implemented. It is important to note that the standard k-fold cross validation technique is not appropriate for time series analysis given the possibility of data leakage, temporal dependencies between data points and inaccuracy in simulating the forecasting environment. Instead, a walk-forward validation was performed where the training set consists of only observations that occur prior to the test observation, with no information from future observations used for constructing the forecast. The forecast accuracy was subsequently evaluated by averaging over the mean absolute percentage error (MAPE) of the next test data point. This procedure is illustrated below. Hyperparameters tuned included p (number of AR terms), q (number of MA terms), and d (number of differences) for ARIMA while the level and trend smoothing terms were tuned for Holt’s linear model.
 
 <p align="center">
 <img width="520" height="250" src="images/cross_validation.png">
@@ -43,7 +43,17 @@ The figure above presents the forecasts and actual order volumes in the three ci
 </p>
 
 
-Upon model fitting the ARIMA models, model diagnostics were also performed to check whether any assumptions were violated. Figure 6 presents a diagnostic performed from the Montreal data. We observed from the top-right histogram and in the qq plot that the residuals appear to be normally distributed. Moreover, the residuals does not display any obvious seasonality trends, which is confirmed by the correlogram.
+<p align="center">
+<img width="650" height="200" src="images/ts_table.png">
+</p>
+
+
+Upon model fitting the ARIMA models, model diagnostics were also performed to check whether any assumptions were violated. Figure below presents a diagnostic performed from the Montreal data. We observed from the top-right histogram and in the qq plot that the residuals appear to be normally distributed. Moreover, the residuals does not display any obvious seasonality trends, which is confirmed by the correlogram.
+
+
+<p align="center">
+<img width="600" height="400" src="images/Montreal_residuals.png">
+</p>
 
 
 ## Challenges
