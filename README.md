@@ -3,7 +3,7 @@
 <img src="images/logo.png">
 </p>
 
-The purpose of this project was to forecast the order volume for August 2019 in the three different cities that X Company (undisclosed) operates in. To tackle this problem, pre-processing and transformation of the data was first performed to ensure stationarity. Subsequently, time series models were implemented with grid-search and with day forward chaining cross validation in order to optimize hyperparameters and mitigate overfitting. Inspection of the residuals, mean absolute percentage error scores as well as comparisons with a baseline model were performed. Accurate predictions of order volume can be helpful for anticipating spikes and dips in orders but also allow more appropriate pricing of items.
+This was a problem given to me by Company X (undisclosed) to forecast the order volume for August 2019 in the three different cities it operates in. To tackle this problem, pre-processing and transformation of the data was first performed to ensure stationarity. Subsequently, time series models were implemented with grid-search and with day forward chaining cross validation in order to optimize hyperparameters and mitigate overfitting. Inspection of the residuals, mean absolute percentage error scores as well as comparisons with a baseline model were performed. Accurate predictions of order volume can be helpful for anticipating spikes and dips in orders but also allow more appropriate pricing of items.
 
 
 
